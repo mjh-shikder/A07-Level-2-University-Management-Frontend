@@ -1,2 +1,279 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------
+   UniManage design tokens
+   Style: glassmorphism, black & white + one lime accent.
+   Dark is the primary look (set defaultTheme="dark" in next-themes).
+   To change the accent, edit --accent-brand in :root and .dark only.
+------------------------------------------------------------------- */
+
+:root {
+  --radius: 1.25rem;
+
+  /* Brand accent (lime) */
+  --accent-brand: oklch(0.91 0.2 122);
+  --accent-brand-foreground: oklch(0.15 0 0);
+
+  /* Light theme: white ground, black ink, lime accent */
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.14 0 0);
+  --card: oklch(1 0 0 / 70%);
+  --card-foreground: oklch(0.14 0 0);
+  --popover: oklch(1 0 0 / 90%);
+  --popover-foreground: oklch(0.14 0 0);
+  --primary: var(--accent-brand);
+  --primary-foreground: var(--accent-brand-foreground);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.14 0 0);
+  --muted: oklch(0.955 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0.14 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0 0 0 / 10%);
+  --input: oklch(0 0 0 / 14%);
+  --ring: oklch(0.72 0.19 122);
+
+  --chart-1: var(--accent-brand);
+  --chart-2: oklch(0.14 0 0);
+  --chart-3: oklch(0.5 0 0);
+  --chart-4: oklch(0.72 0 0);
+  --chart-5: oklch(0.85 0 0);
+
+  --sidebar: oklch(1 0 0 / 70%);
+  --sidebar-foreground: oklch(0.14 0 0);
+  --sidebar-primary: var(--accent-brand);
+  --sidebar-primary-foreground: var(--accent-brand-foreground);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.14 0 0);
+  --sidebar-border: oklch(0 0 0 / 10%);
+  --sidebar-ring: oklch(0.72 0.19 122);
+
+  /* Glass surfaces */
+  --glass-bg: oklch(1 0 0 / 65%);
+  --glass-bg-strong: oklch(1 0 0 / 82%);
+  --glass-border: oklch(0 0 0 / 10%);
+  --glass-highlight: oklch(1 0 0 / 80%);
+  --glass-shadow: 0 8px 32px oklch(0 0 0 / 10%);
+  --glow-1: oklch(0.91 0.2 122 / 35%);
+  --glow-2: oklch(0 0 0 / 6%);
+}
+
+.dark {
+  --background: oklch(0.12 0.003 270);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(1 0 0 / 7%);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.17 0 0 / 92%);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: var(--accent-brand);
+  --primary-foreground: var(--accent-brand-foreground);
+  --secondary: oklch(1 0 0 / 10%);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(1 0 0 / 8%);
+  --muted-foreground: oklch(0.72 0 0);
+  --accent: oklch(1 0 0 / 10%);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 14%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: var(--accent-brand);
+
+  --chart-1: var(--accent-brand);
+  --chart-2: oklch(0.97 0 0);
+  --chart-3: oklch(0.72 0 0);
+  --chart-4: oklch(0.5 0 0);
+  --chart-5: oklch(0.35 0 0);
+
+  --sidebar: oklch(1 0 0 / 6%);
+  --sidebar-foreground: oklch(0.97 0 0);
+  --sidebar-primary: var(--accent-brand);
+  --sidebar-primary-foreground: var(--accent-brand-foreground);
+  --sidebar-accent: oklch(1 0 0 / 10%);
+  --sidebar-accent-foreground: oklch(0.97 0 0);
+  --sidebar-border: oklch(1 0 0 / 14%);
+  --sidebar-ring: var(--accent-brand);
+
+  /* Glass surfaces */
+  --glass-bg: oklch(1 0 0 / 7%);
+  --glass-bg-strong: oklch(1 0 0 / 12%);
+  --glass-border: oklch(1 0 0 / 14%);
+  --glass-highlight: oklch(1 0 0 / 12%);
+  --glass-shadow: 0 8px 32px oklch(0 0 0 / 35%);
+  --glow-1: oklch(0.91 0.2 122 / 30%);
+  --glow-2: oklch(1 0 0 / 13%);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-brand: var(--accent-brand);
+  --color-brand-foreground: var(--accent-brand-foreground);
+
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--accent-brand);
+    color: var(--accent-brand-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Slim scrollbars that suit glass panels */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.5 0 0 / 40%) transparent;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Glass utilities
+   Usage: <div className="glass rounded-2xl p-6">
+------------------------------------------------------------------- */
+
+@utility glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-highlight);
+}
+
+@utility glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-highlight);
+}
+
+/* Page backdrop: soft lime and white glows so the blur has something to show.
+   Put it on the app shell wrapper: <div className="app-bg min-h-dvh"> */
+@utility app-bg {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(620px 420px at 88% 8%, var(--glow-1), transparent 62%),
+    radial-gradient(520px 520px at 8% 92%, var(--glow-2), transparent 62%),
+    radial-gradient(420px 320px at 62% 86%, var(--glow-1), transparent 70%);
+  background-attachment: fixed;
+}
+
+/* Accent text and glow helpers */
+@utility text-brand {
+  color: var(--accent-brand);
+}
+
+@utility glow-brand {
+  box-shadow: 0 0 32px oklch(0.91 0.2 122 / 35%);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-strong {
+    background: var(--popover);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print: used by the student transcript page */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .glass,
+  .glass-strong,
+  .app-bg {
+    background: #fff !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border-color: #ddd !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}
