@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "biome lint",
+    "format": "biome format",
+    "check": "biome check",
+    "typecheck": "tsc --noEmit",
+      "format:check" : "npx biome format ./src",
+        "format:fix" : "npx biome format --write ./src",
+        "lint:check":"npx biome lint",
+        "lint:fix":"npx biome lint --write ./src"
+
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.8",
@@ -28,6 +36,7 @@
     "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.6.9",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
