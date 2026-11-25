@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
+const backendInternalUrl = (
+  process.env.BACKEND_INTERNAL_URL || "http://localhost:5000/api/v1"
+).replace(/\/+$/, "");
+
 const nextConfig: NextConfig = {
-  /* config options here */
   experimental: {
     agentFeedback: true,
   },
@@ -14,6 +17,14 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/backend/:path*",
+        destination: `${backendInternalUrl}/:path*`,
+      },
+    ];
   },
 };
 
