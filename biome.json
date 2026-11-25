@@ -18,6 +18,9 @@
 			"preset": "recommended",
 			"complexity": {
 				"noImportantStyles": "off"
+			},
+			"style": {
+				"useImportType": "off"
 			}
 		}
 	},
