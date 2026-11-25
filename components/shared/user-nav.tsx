@@ -77,7 +77,7 @@ export function UserNav() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="glass-strong w-56 border-white/10"
+        className="w-56"
         align="end"
         forceMount
       >
