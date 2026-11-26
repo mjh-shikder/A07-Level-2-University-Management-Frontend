@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -328,6 +328,17 @@ export function DashboardSidebar({
 
 // ─── DashboardShell ───────────────────────────────────────────────────────────
 
+function RouteChangeCloser({ onClose }: { onClose: () => void }) {
+  const pathname = usePathname();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname drives the close; onClose is stable
+  useEffect(() => {
+    onClose();
+  }, [pathname]);
+
+  return null;
+}
+
 /**
  * Full dashboard chrome: sidebar + header + scrollable main area.
  * Used by each role's layout.tsx.
@@ -344,24 +355,25 @@ export function DashboardShell({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-  const pathname = usePathname();
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname drives the close; setMobileOpen is stable
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   return (
     <div className="flex h-dvh overflow-hidden">
-      <DashboardSidebar
-        role={userRole}
-        mobileOpen={mobileOpen}
-        onMobileClose={() => setMobileOpen(false)}
-        collapsed={collapsed}
-        onToggleCollapse={() => setCollapsed((c) => !c)}
-      />
+      <Suspense fallback={null}>
+        <RouteChangeCloser onClose={() => setMobileOpen(false)} />
+      </Suspense>
+      <Suspense fallback={<div className="hidden w-60 border-r border-white/5 md:block" />}>
+        <DashboardSidebar
+          role={userRole}
+          mobileOpen={mobileOpen}
+          onMobileClose={() => setMobileOpen(false)}
+          collapsed={collapsed}
+          onToggleCollapse={() => setCollapsed((c) => !c)}
+        />
+      </Suspense>
       <div className="flex flex-1 flex-col min-w-0 overflow-hidden">
-        {headerSlot(() => setMobileOpen(true))}
+        <Suspense fallback={<div className="h-14 border-b border-white/5" />}>
+          {headerSlot(() => setMobileOpen(true))}
+        </Suspense>
         <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
       </div>
     </div>
