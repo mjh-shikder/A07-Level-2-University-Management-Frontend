@@ -1,15 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Building2, GraduationCap, IdCard, Loader2, Mail, Save, User } from "lucide-react";
+import {
+  Building2,
+  Camera,
+  GraduationCap,
+  IdCard,
+  Loader2,
+  Mail,
+  Save,
+  User,
+} from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { StatusBadge } from "@/components/shared/status-badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -43,6 +53,24 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
+const ALLOWED_IMAGE_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+]);
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+
+type ProfileImageResponse =
+  | UserSummary
+  | {
+      imageUrl?: string | null;
+      imagePublicId?: string | null;
+      profileImage?: string | null;
+      avatarUrl?: string | null;
+      user?: UserSummary;
+    };
+
 export interface ProfileInfoFormProps {
   initialUser: UserSummary;
 }
@@ -53,6 +81,8 @@ export function ProfileInfoForm({ initialUser }: ProfileInfoFormProps) {
   const setUser = useAuthStore((state) => state.setUser);
   const [user, setLocalUser] = useState<UserSummary>(initialUser);
   const [retryCountdown, setRetryCountdown] = useState<number>(0);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -64,7 +94,11 @@ export function ProfileInfoForm({ initialUser }: ProfileInfoFormProps) {
   });
 
   useEffect(() => {
-    setLocalUser(initialUser);
+    setLocalUser((prev) => ({
+      ...initialUser,
+      imageUrl: initialUser.imageUrl ?? prev.imageUrl ?? null,
+      imagePublicId: initialUser.imagePublicId ?? prev.imagePublicId ?? null,
+    }));
     form.reset({
       firstName: initialUser.firstName,
       lastName: initialUser.lastName,
@@ -111,6 +145,82 @@ export function ProfileInfoForm({ initialUser }: ProfileInfoFormProps) {
     },
   });
 
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
+  const uploadImageMutation = useMutation<ProfileImageResponse, ApiError, File>(
+    {
+      mutationFn: (file) => {
+        const formData = new FormData();
+        formData.append("profileImage", file);
+        return apiFetch<ProfileImageResponse>("/users/profile-image", {
+          method: "PATCH",
+          body: formData,
+        });
+      },
+      onSuccess: (response) => {
+        const nextImage =
+          ("user" in response && response.user
+            ? (response.user.imageUrl ??
+              response.user.profileImage ??
+              response.user.avatarUrl)
+            : undefined) ??
+          response.imageUrl ??
+          response.profileImage ??
+          response.avatarUrl ??
+          null;
+
+        const updatedUser: UserSummary =
+          "user" in response && response.user
+            ? response.user
+            : "id" in response && response.id
+              ? { ...user, ...(response as UserSummary) }
+              : {
+                  ...user,
+                  imageUrl: nextImage,
+                  imagePublicId:
+                    "imagePublicId" in response
+                      ? response.imagePublicId
+                      : user.imagePublicId,
+                };
+
+        setLocalUser(updatedUser);
+        setUser(updatedUser);
+        queryClient.setQueryData(AUTH_ME_QUERY_KEY, updatedUser);
+        setPreviewUrl(null);
+        toast.success("Profile picture updated successfully.");
+        router.refresh();
+      },
+      onError: (error) => {
+        setPreviewUrl(null);
+        toast.error(error.message || "Unable to upload profile picture.");
+      },
+    }
+  );
+
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+
+    if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
+      toast.error("Only JPEG, PNG, WebP, and GIF images are allowed.");
+      return;
+    }
+    if (file.size > MAX_IMAGE_BYTES) {
+      toast.error("Image must be 5 MB or smaller.");
+      return;
+    }
+
+    setPreviewUrl(URL.createObjectURL(file));
+    uploadImageMutation.mutate(file);
+  }
+
   function onSubmit(values: ProfileFormValues) {
     if (retryCountdown > 0) return;
     updateProfileMutation.mutate(values);
@@ -118,6 +228,14 @@ export function ProfileInfoForm({ initialUser }: ProfileInfoFormProps) {
 
   const isDirty = form.formState.isDirty;
   const isSubmitting = updateProfileMutation.isPending;
+  const isUploadingImage = uploadImageMutation.isPending;
+  const avatarSrc =
+    previewUrl ??
+    user.imageUrl ??
+    user.profileImage ??
+    user.avatarUrl ??
+    null;
+  const initials = `${user.firstName?.[0] ?? ""}${user.lastName?.[0] ?? ""}`.toUpperCase() || "U";
 
   return (
     <Card className="glass rounded-2xl border-white/10">
@@ -142,6 +260,64 @@ export function ProfileInfoForm({ initialUser }: ProfileInfoFormProps) {
       </CardHeader>
 
       <CardContent className="space-y-6">
+        {/* Profile Picture Upload */}
+        <div className="flex flex-col gap-4 rounded-xl border border-border/70 bg-secondary/20 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <Avatar className="size-16 border border-border">
+              {avatarSrc ? (
+                <AvatarImage
+                  src={avatarSrc}
+                  alt={`${user.firstName} ${user.lastName}`}
+                  unoptimized={Boolean(previewUrl)}
+                />
+              ) : (
+                <AvatarFallback className="text-base font-semibold">
+                  {initials}
+                </AvatarFallback>
+              )}
+            </Avatar>
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-foreground">
+                Profile Picture
+              </p>
+              <p className="text-xs text-muted-foreground">
+                JPEG, PNG, WebP, or GIF up to 5 MB.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              onChange={handleFileChange}
+              className="sr-only"
+              aria-label="Upload profile picture"
+              disabled={isUploadingImage}
+            />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={isUploadingImage}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              {isUploadingImage ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                  Uploading…
+                </>
+              ) : (
+                <>
+                  <Camera className="size-4" aria-hidden="true" />
+                  Change Photo
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+
         {/* Read-only academic / account metadata */}
         <div className="grid gap-3 rounded-xl border border-border/70 bg-secondary/30 p-4 sm:grid-cols-2">
           <div className="flex items-start gap-2.5">

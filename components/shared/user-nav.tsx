@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@/hooks/use-auth";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -57,6 +57,8 @@ export function UserNav() {
   const initials = getInitials(user.firstName, user.lastName, user.email);
   const color = avatarColor(user.email ?? user.id);
   const profilePath = PROFILE_PATHS[user.role] ?? "/";
+  const avatarSrc =
+    user.imageUrl ?? user.profileImage ?? user.avatarUrl ?? null;
 
   return (
     <DropdownMenu>
@@ -66,12 +68,19 @@ export function UserNav() {
           className="relative h-9 w-9 rounded-full p-0 focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Avatar className="h-9 w-9 border border-white/10">
-            <AvatarFallback
-              style={{ backgroundColor: color }}
-              className="text-white text-xs font-semibold"
-            >
-              {initials}
-            </AvatarFallback>
+            {avatarSrc ? (
+              <AvatarImage
+                src={avatarSrc}
+                alt={`${user.firstName} ${user.lastName}`}
+              />
+            ) : (
+              <AvatarFallback
+                style={{ backgroundColor: color }}
+                className="text-white text-xs font-semibold"
+              >
+                {initials}
+              </AvatarFallback>
+            )}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

@@ -100,6 +100,10 @@ export interface UserSummary {
 	lastName: string;
 	role: Role;
 	status: UserStatus;
+	imageUrl?: string | null;
+	imagePublicId?: string | null;
+	profileImage?: string | null;
+	avatarUrl?: string | null;
 	createdAt: string;
 	updatedAt: string;
 	studentProfile?: {

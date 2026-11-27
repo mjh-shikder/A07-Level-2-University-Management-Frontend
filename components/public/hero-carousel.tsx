@@ -44,7 +44,7 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative min-h-72 overflow-hidden rounded-xl border border-white/10 bg-secondary/30 sm:min-h-80 lg:min-h-[390px]"
+      className="relative min-h-72 overflow-hidden rounded-xl border border-white/10 bg-secondary/30 sm:min-h-80 lg:min-h-97.5"
       aria-roledescription="carousel"
       aria-label="Campus highlights"
     >
@@ -64,7 +64,7 @@ export function HeroCarousel() {
             className="object-cover"
             priority={index === 0}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
         </div>
       ))}
 

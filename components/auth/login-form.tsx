@@ -44,15 +44,15 @@ const DEMO_ACCOUNTS: DemoAccount[] = [
   {
     role: "INSTRUCTOR",
     label: "Instructor",
-    email: "dr.smith@university.edu",
-    password: "Instructor123!",
+    email: "instructor01@university.com",
+    password: "Password123!",
     icon: UserCheck,
   },
   {
     role: "STUDENT",
     label: "Student",
-    email: "student1@university.edu",
-    password: "Student123!",
+    email: "student03@university.com",
+    password: "Password123!",
     icon: GraduationCap,
   },
 ];
