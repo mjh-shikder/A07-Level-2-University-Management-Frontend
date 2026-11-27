@@ -4,11 +4,14 @@ import type { Metadata } from "next";
 import AdminUsersLoading from "@/app/(admin)/admin/users/loading";
 import { AdminUsersClient } from "@/components/admin/users/admin-users-client";
 import { serverApiFetch, serverApiFetchEnvelope } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { UserSummary } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "User Management",
-};
+  description:
+    "Manage university accounts, filter by role or status, and update user permissions.",
+});
 
 interface AdminUsersSearchParams {
   page?: string;

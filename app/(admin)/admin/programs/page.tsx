@@ -4,11 +4,14 @@ import type { Metadata } from "next";
 import AdminProgramsLoading from "@/app/(admin)/admin/programs/loading";
 import { AdminProgramsClient } from "@/components/admin/programs/admin-programs-client";
 import { serverApiFetch, serverApiFetchEnvelope } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Department, Program } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Academic Programs",
-};
+  description:
+    "Manage degree programs, department associations, and required graduation credits.",
+});
 
 interface ProgramsSearchParams {
   page?: string;

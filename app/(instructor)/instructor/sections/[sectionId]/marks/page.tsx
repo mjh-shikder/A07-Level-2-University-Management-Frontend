@@ -3,10 +3,13 @@ import type { Metadata } from "next";
 
 import SectionMarksLoading from "@/app/(instructor)/instructor/sections/[sectionId]/marks/loading";
 import { SectionMarksServerContent } from "@/components/instructor/section-marks-server";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Marks Entry & Gradebook",
-};
+  description:
+    "Enter student exam marks and compute weighted draft section grades.",
+});
 
 async function SectionMarksWrapper({
   params,

@@ -6,11 +6,14 @@ import SectionAttendanceLoading from "@/app/(instructor)/instructor/sections/[se
 import { SectionAttendanceClient } from "@/components/instructor/section-attendance-client";
 import { ApiError } from "@/lib/api-error";
 import { serverApiFetch } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Enrollment, Section } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Daily Attendance",
-};
+  description:
+    "Mark and update daily bulk attendance for students enrolled in your course section.",
+});
 
 async function SectionAttendanceContent({
   params,

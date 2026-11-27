@@ -49,7 +49,7 @@ export function DashboardHeader({
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden shrink-0"
+        className="size-10 md:hidden shrink-0"
         onClick={onMobileMenuToggle}
         aria-label="Toggle sidebar"
       >

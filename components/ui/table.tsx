@@ -6,15 +6,23 @@ import { cn } from "@/lib/utils";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <div
-      data-slot="table-container"
-      className="relative w-full overflow-x-auto"
-    >
-      <table
-        data-slot="table"
-        className={cn("w-full caption-bottom text-sm", className)}
-        {...props}
-      />
+    <div className="space-y-1.5">
+      <div
+        data-slot="table-container"
+        className="relative w-full overflow-x-auto touch-pan-x"
+      >
+        <table
+          data-slot="table"
+          className={cn("w-full caption-bottom text-sm", className)}
+          {...props}
+        />
+      </div>
+      <p
+        aria-hidden="true"
+        className="px-3 pb-1 text-[11px] text-muted-foreground/80 sm:hidden"
+      >
+        Swipe horizontally to view all columns &rarr;
+      </p>
     </div>
   );
 }

@@ -4,11 +4,13 @@ import type { Metadata } from "next";
 import AdminDepartmentsLoading from "@/app/(admin)/admin/departments/loading";
 import { AdminDepartmentsClient } from "@/components/admin/departments/admin-departments-client";
 import { serverApiFetchEnvelope } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Department } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Departments",
-};
+  description: "Create, edit, and manage university academic departments.",
+});
 
 interface DepartmentsSearchParams {
   page?: string;

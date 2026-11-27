@@ -12,10 +12,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Payment Cancelled",
-};
+  description:
+    "Stripe Checkout session cancelled. Return to student billing to retry payment.",
+});
 
 async function PaymentCancelContent({
   searchParams,

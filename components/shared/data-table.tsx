@@ -243,7 +243,7 @@ export function DataTable<TData>({
                       type="button"
                       variant="outline"
                       size="icon"
-                      className="size-8"
+                      className="size-10 sm:size-8"
                       disabled={isLoading || meta.page <= 1}
                       onClick={() => onPageChange(meta.page - 1)}
                       aria-label="Previous page"
@@ -260,7 +260,7 @@ export function DataTable<TData>({
                       type="button"
                       variant="outline"
                       size="icon"
-                      className="size-8"
+                      className="size-10 sm:size-8"
                       disabled={isLoading || meta.page >= meta.totalPages}
                       onClick={() => onPageChange(meta.page + 1)}
                       aria-label="Next page"

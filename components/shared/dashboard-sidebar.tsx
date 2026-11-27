@@ -22,10 +22,8 @@ import {
   ScrollText,
   ShieldCheck,
   Users,
-  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/use-auth";
 import type { Role } from "@/types/api";
@@ -239,7 +237,7 @@ function MobileDrawer({
         <SheetTitle className="sr-only">{roleLabel} Navigation</SheetTitle>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-4 min-h-14 border-b border-white/5">
+        <div className="flex items-center px-4 min-h-14 border-b border-white/5 pr-12">
           <div className="flex items-center gap-2.5">
             <div className="size-7 rounded-lg bg-accent-brand/20 flex items-center justify-center">
               <GraduationCap className="size-4 text-accent-brand" />
@@ -248,15 +246,6 @@ function MobileDrawer({
               {roleLabel}
             </span>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="size-8"
-          >
-            <X className="size-4" />
-            <span className="sr-only">Close menu</span>
-          </Button>
         </div>
 
         {/* Nav */}

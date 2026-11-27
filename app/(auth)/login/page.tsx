@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 
 import { LoginForm } from "@/components/auth/login-form";
 import { Skeleton } from "@/components/ui/skeleton";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Login",
   description:
     "Sign in to UniManage as an Administrator, Instructor, or Student.",
-};
+});
 
 function LoginFormSkeleton() {
   return (

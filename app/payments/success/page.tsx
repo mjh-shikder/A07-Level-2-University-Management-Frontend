@@ -3,10 +3,13 @@ import type { Metadata } from "next";
 
 import { PaymentSuccessClient } from "@/components/payments/payment-success-client";
 import { Skeleton } from "@/components/ui/skeleton";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Payment Confirmation",
-};
+  description:
+    "Verify your tuition payment receipt and invoice status after Stripe Checkout.",
+});
 
 async function PaymentSuccessWrapper({
   searchParams,

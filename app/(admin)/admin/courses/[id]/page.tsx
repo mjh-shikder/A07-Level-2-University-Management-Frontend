@@ -6,11 +6,14 @@ import AdminCourseDetailLoading from "@/app/(admin)/admin/courses/[id]/loading";
 import { CourseDetailClient } from "@/components/admin/courses/course-detail-client";
 import { ApiError } from "@/lib/api-error";
 import { serverApiFetch } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Course, Program } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Course Details",
-};
+  description:
+    "View course metadata, manage academic prerequisites, and inspect dependent courses.",
+});
 
 async function CourseDetailContent({
   params,

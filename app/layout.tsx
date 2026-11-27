@@ -16,13 +16,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(appUrl),
   title: {
     default: "UniManage — University Management Portal",
     template: "%s | UniManage",
   },
   description:
     "Unified academic portal for students, instructors, and university administrators.",
+  openGraph: {
+    title: "UniManage — University Management Portal",
+    description:
+      "Unified academic portal for students, instructors, and university administrators.",
+    type: "website",
+    siteName: "UniManage",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

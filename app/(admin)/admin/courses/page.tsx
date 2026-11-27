@@ -4,11 +4,14 @@ import type { Metadata } from "next";
 import AdminCoursesLoading from "@/app/(admin)/admin/courses/loading";
 import { AdminCoursesClient } from "@/components/admin/courses/admin-courses-client";
 import { serverApiFetch, serverApiFetchEnvelope } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Course, Program } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Course Catalog",
-};
+  description:
+    "Manage university courses, credit hours, program assignments, and prerequisites.",
+});
 
 interface CoursesSearchParams {
   page?: string;

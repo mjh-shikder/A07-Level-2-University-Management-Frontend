@@ -4,11 +4,14 @@ import type { Metadata } from "next";
 import AdminSemestersLoading from "@/app/(admin)/admin/semesters/loading";
 import { AdminSemestersClient } from "@/components/admin/semesters/admin-semesters-client";
 import { serverApiFetchEnvelope } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Semester } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Academic Semesters",
-};
+  description:
+    "Configure academic terms, registration windows, and semester lifecycle transitions.",
+});
 
 interface SemestersSearchParams {
   page?: string;

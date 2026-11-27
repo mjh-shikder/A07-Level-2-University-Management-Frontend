@@ -6,11 +6,14 @@ import SectionExamsLoading from "@/app/(instructor)/instructor/sections/[section
 import { SectionExamsClient } from "@/components/instructor/section-exams-client";
 import { ApiError } from "@/lib/api-error";
 import { serverApiFetch } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Exam, Result, Section } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Exams & Weights",
-};
+  description:
+    "Configure section exams, assessment weights totaling 100%, and exam schedules.",
+});
 
 async function SectionExamsContent({
   params,

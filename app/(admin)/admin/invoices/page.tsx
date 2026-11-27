@@ -3,10 +3,13 @@ import type { Metadata } from "next";
 
 import AdminInvoicesLoading from "@/app/(admin)/admin/invoices/loading";
 import { AdminInvoicesContent } from "@/components/admin/invoices/admin-invoices-content";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Billing & Invoices",
-};
+  description:
+    "Generate student semester tuition invoices and monitor payment statuses.",
+});
 
 export default function AdminInvoicesPage({
   searchParams,

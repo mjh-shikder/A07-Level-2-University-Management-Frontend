@@ -4,11 +4,14 @@ import type { Metadata } from "next";
 import AdminSectionsLoading from "@/app/(admin)/admin/sections/loading";
 import { AdminSectionsClient } from "@/components/admin/sections/admin-sections-client";
 import { serverApiFetch, serverApiFetchEnvelope } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Course, Section, Semester, UserSummary } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Sections & Scheduling",
-};
+  description:
+    "Schedule course sections, assign instructors, set capacities, and manage weekly meeting slots.",
+});
 
 interface SectionsSearchParams {
   page?: string;

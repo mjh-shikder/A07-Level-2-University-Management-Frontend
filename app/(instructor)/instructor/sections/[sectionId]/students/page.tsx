@@ -9,11 +9,14 @@ import {
 } from "@/components/instructor/section-roster-client";
 import { ApiError } from "@/lib/api-error";
 import { serverApiFetch, serverApiFetchEnvelope } from "@/lib/api-server";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Section } from "@/types/api";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Section Roster",
-};
+  description:
+    "View enrolled students, registration IDs, academic programs, and export section rosters.",
+});
 
 interface RosterSearchParams {
   page?: string;
