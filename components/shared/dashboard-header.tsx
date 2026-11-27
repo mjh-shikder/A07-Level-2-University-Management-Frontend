@@ -41,7 +41,7 @@ export function DashboardHeader({
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-white/5 bg-background/80 backdrop-blur-xl px-4 md:px-6",
+        "sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-white/5 bg-background/5 backdrop-blur-xl px-4 md:px-6 print:hidden",
         className
       )}
     >

@@ -14,6 +14,7 @@ import {
   ClipboardList,
   FileText,
   GraduationCap,
+  Home,
   LayoutDashboard,
   Library,
   ListOrdered,
@@ -145,7 +146,7 @@ function DesktopSidebar({
   return (
     <aside
       className={cn(
-        "hidden md:flex flex-col h-full border-r border-white/5 bg-background/60 backdrop-blur-xl transition-[width] duration-300",
+        "hidden md:flex flex-col h-full border-r border-white/5 bg-background/60 backdrop-blur-xl transition-[width] duration-300 print:hidden",
         collapsed ? "w-16" : "w-60"
       )}
     >
@@ -175,6 +176,18 @@ function DesktopSidebar({
 
       {/* Footer */}
       <div className="border-t border-white/5 p-2 space-y-1">
+        <Link
+          href="/"
+          className={cn(
+            "flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground",
+            collapsed && "justify-center px-2"
+          )}
+          title={collapsed ? "Home" : undefined}
+        >
+          <Home className="size-4 shrink-0" aria-hidden="true" />
+          {!collapsed && <span>Home</span>}
+        </Link>
+
         <button
           type="button"
           onClick={() => logoutMutation.mutate()}
@@ -255,8 +268,17 @@ function MobileDrawer({
           ))}
         </nav>
 
-        {/* Sign out */}
-        <div className="border-t border-white/5 p-2">
+        {/* Home & Sign out */}
+        <div className="border-t border-white/5 p-2 space-y-1">
+          <Link
+            href="/"
+            onClick={onClose}
+            className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
+          >
+            <Home className="size-4 shrink-0" aria-hidden="true" />
+            <span>Home</span>
+          </Link>
+
           <button
             type="button"
             onClick={() => {
@@ -346,11 +368,11 @@ export function DashboardShell({
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="flex h-dvh overflow-hidden">
+    <div className="flex h-dvh overflow-hidden print:block print:h-auto print:overflow-visible">
       <Suspense fallback={null}>
         <RouteChangeCloser onClose={() => setMobileOpen(false)} />
       </Suspense>
-      <Suspense fallback={<div className="hidden w-60 border-r border-white/5 md:block" />}>
+      <Suspense fallback={<div className="hidden w-60 border-r border-white/5 md:block print:hidden" />}>
         <DashboardSidebar
           role={userRole}
           mobileOpen={mobileOpen}
@@ -359,11 +381,13 @@ export function DashboardShell({
           onToggleCollapse={() => setCollapsed((c) => !c)}
         />
       </Suspense>
-      <div className="flex flex-1 flex-col min-w-0 overflow-hidden">
-        <Suspense fallback={<div className="h-14 border-b border-white/5" />}>
+      <div className="flex flex-1 flex-col min-w-0 overflow-hidden print:block print:overflow-visible">
+        <Suspense fallback={<div className="h-14 border-b border-white/5 print:hidden" />}>
           {headerSlot(() => setMobileOpen(true))}
         </Suspense>
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 print:overflow-visible print:p-0">
+          {children}
+        </main>
       </div>
     </div>
   );

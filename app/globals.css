@@ -259,20 +259,37 @@
   }
 }
 
-/* Print: used by the student transcript page */
+/* Print: used by the student transcript and roster pages */
 @media print {
+  :root,
+  .dark {
+    --background: #ffffff;
+    --foreground: #111827;
+    --card: #ffffff;
+    --card-foreground: #111827;
+    --muted: #f3f4f6;
+    --muted-foreground: #4b5563;
+    --border: #d1d5db;
+    --accent-brand: #047857;
+  }
+
   body {
     background: #fff !important;
-    color: #000 !important;
+    color: #111827 !important;
   }
 
   .glass,
   .glass-strong,
   .app-bg {
     background: #fff !important;
+    background-image: none !important;
     backdrop-filter: none !important;
     box-shadow: none !important;
-    border-color: #ddd !important;
+    border-color: #d1d5db !important;
+  }
+
+  tr {
+    break-inside: avoid;
   }
 
   .print\:hidden {

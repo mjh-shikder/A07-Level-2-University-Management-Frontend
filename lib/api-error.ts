@@ -21,7 +21,7 @@ export function parseRetryAfter(headerValue: string | null): number | undefined 
   const targetDate = Date.parse(headerValue);
   if (!Number.isNaN(targetDate)) {
     const diffSeconds = Math.ceil((targetDate - Date.now()) / 1000);
-    return diffSeconds > 0 ? diffSeconds : 0;
+    return Math.max(diffSeconds, 0);
   }
   return undefined;
 }
@@ -95,7 +95,7 @@ export async function parseApiResponse<T>(
     }
   }
 
-  if (!response.ok || !payload || !payload.success) {
+  if (!response.ok || !payload?.success) {
     const errPayload = payload as ApiErrorResponse | null;
     const message =
       errPayload?.message ||
