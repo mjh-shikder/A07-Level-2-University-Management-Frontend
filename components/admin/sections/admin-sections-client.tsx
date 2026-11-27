@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
+  Award,
   ListOrdered,
   MoreHorizontal,
   Pencil,
@@ -238,6 +240,12 @@ export function AdminSectionsClient({
             <DropdownMenuItem onSelect={() => setAssigningSection(row)}>
               <UserCheck className="size-4" aria-hidden="true" />
               <span>Assign Instructor</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/admin/sections/${row.id}/results`}>
+                <Award className="size-4" aria-hidden="true" />
+                <span>Results &amp; Publish</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
