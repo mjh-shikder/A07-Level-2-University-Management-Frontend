@@ -5,7 +5,7 @@
 
 /* ------------------------------------------------------------------
    UniManage design tokens
-   Style: glassmorphism, black & white + one lime accent.
+   Style: glassmorphism, black & white + Deep Emerald accent.
    Dark is the primary look (set defaultTheme="dark" in next-themes).
    To change the accent, edit --accent-brand in :root and .dark only.
 ------------------------------------------------------------------- */
@@ -13,11 +13,11 @@
 :root {
   --radius: 1.25rem;
 
-  /* Brand accent (lime) */
-  --accent-brand: oklch(0.91 0.2 122);
-  --accent-brand-foreground: oklch(0.15 0 0);
+  /* Brand accent (Deep Emerald) */
+  --accent-brand: oklch(0.51 0.14 162);
+  --accent-brand-foreground: oklch(0.99 0 0);
 
-  /* Light theme: white ground, black ink, lime accent */
+  /* Light theme: white ground, black ink, deep emerald accent */
   --background: oklch(0.985 0 0);
   --foreground: oklch(0.14 0 0);
   --card: oklch(1 0 0 / 70%);
@@ -35,7 +35,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0 0 0 / 10%);
   --input: oklch(0 0 0 / 14%);
-  --ring: oklch(0.72 0.19 122);
+  --ring: oklch(0.51 0.14 162);
 
   --chart-1: var(--accent-brand);
   --chart-2: oklch(0.14 0 0);
@@ -50,7 +50,7 @@
   --sidebar-accent: oklch(0.95 0 0);
   --sidebar-accent-foreground: oklch(0.14 0 0);
   --sidebar-border: oklch(0 0 0 / 10%);
-  --sidebar-ring: oklch(0.72 0.19 122);
+  --sidebar-ring: oklch(0.51 0.14 162);
 
   /* Glass surfaces */
   --glass-bg: oklch(1 0 0 / 65%);
@@ -58,11 +58,13 @@
   --glass-border: oklch(0 0 0 / 10%);
   --glass-highlight: oklch(1 0 0 / 80%);
   --glass-shadow: 0 8px 32px oklch(0 0 0 / 10%);
-  --glow-1: oklch(0.91 0.2 122 / 35%);
+  --glow-1: oklch(0.65 0.14 162 / 18%);
   --glow-2: oklch(0 0 0 / 6%);
 }
 
 .dark {
+  --accent-brand: oklch(0.70 0.17 162);
+  --accent-brand-foreground: oklch(0.14 0 0);
   --background: oklch(0.12 0.003 270);
   --foreground: oklch(0.97 0 0);
   --card: oklch(1 0 0 / 7%);
@@ -103,7 +105,7 @@
   --glass-border: oklch(1 0 0 / 14%);
   --glass-highlight: oklch(1 0 0 / 12%);
   --glass-shadow: 0 8px 32px oklch(0 0 0 / 35%);
-  --glow-1: oklch(0.91 0.2 122 / 30%);
+  --glow-1: oklch(0.70 0.17 162 / 24%);
   --glow-2: oklch(1 0 0 / 13%);
 }
 
@@ -234,7 +236,7 @@
 }
 
 @utility glow-brand {
-  box-shadow: 0 0 32px oklch(0.91 0.2 122 / 35%);
+  box-shadow: 0 0 32px oklch(0.65 0.16 162 / 35%);
 }
 
 /* Fallback for browsers without backdrop-filter */
