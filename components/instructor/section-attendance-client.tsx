@@ -47,19 +47,22 @@ const STATUS_BUTTON_STYLES: Record<
 > = {
   PRESENT: {
     active:
-      "border-emerald-500/50 bg-emerald-500/20 text-emerald-300 shadow-xs",
+      "border-emerald-500/50 bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 shadow-xs",
     label: "Present",
   },
   ABSENT: {
-    active: "border-destructive/50 bg-destructive/20 text-red-300 shadow-xs",
+    active:
+      "border-destructive/50 bg-destructive/20 text-red-700 dark:text-red-300 shadow-xs",
     label: "Absent",
   },
   LATE: {
-    active: "border-amber-500/50 bg-amber-500/20 text-amber-300 shadow-xs",
+    active:
+      "border-amber-500/50 bg-amber-500/20 text-amber-800 dark:text-amber-300 shadow-xs",
     label: "Late",
   },
   EXCUSED: {
-    active: "border-blue-400/50 bg-blue-500/20 text-blue-300 shadow-xs",
+    active:
+      "border-blue-400/50 bg-blue-500/20 text-blue-700 dark:text-blue-300 shadow-xs",
     label: "Excused",
   },
 };

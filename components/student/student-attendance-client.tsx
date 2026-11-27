@@ -273,7 +273,7 @@ export function StudentAttendanceClient({
                     className={cn(
                       "font-mono text-xs",
                       attendancePct >= 75
-                        ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+                        ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
                         : ""
                     )}
                   >

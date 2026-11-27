@@ -153,11 +153,11 @@ export function StudentRegistrationClient({
       {hasUnpaidInvoices ? (
         <div
           role="alert"
-          className="flex flex-col gap-3 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 sm:flex-row sm:items-center sm:justify-between"
+          className="flex flex-col gap-3 rounded-2xl border border-amber-600/35 bg-amber-500/15 p-4 sm:flex-row sm:items-center sm:justify-between dark:border-amber-500/40 dark:bg-amber-500/10"
         >
           <div className="flex items-start gap-3">
             <AlertTriangle
-              className="mt-0.5 size-5 shrink-0 text-amber-400"
+              className="mt-0.5 size-5 shrink-0 text-amber-700 dark:text-amber-400"
               aria-hidden="true"
             />
             <div className="space-y-0.5">
@@ -205,7 +205,9 @@ export function StudentRegistrationClient({
               <p
                 className={cn(
                   "text-xs font-medium",
-                  isWindowOpen ? "text-emerald-400" : "text-amber-300"
+                  isWindowOpen
+                    ? "text-emerald-700 dark:text-emerald-400"
+                    : "text-amber-800 dark:text-amber-300"
                 )}
               >
                 {windowNotOpen
@@ -262,7 +264,7 @@ export function StudentRegistrationClient({
       {ruleError ? (
         <div
           role="alert"
-          className="flex items-start justify-between gap-3 rounded-2xl border border-destructive/40 bg-destructive/10 p-4 text-sm text-destructive-foreground"
+          className="flex items-start justify-between gap-3 rounded-2xl border border-destructive/40 bg-destructive/10 p-4 text-sm text-destructive dark:text-red-300"
         >
           <div className="flex items-start gap-2.5">
             <AlertCircle
@@ -391,7 +393,7 @@ export function StudentRegistrationClient({
                         </div>
 
                         {isEnrolledInSection ? (
-                          <Badge className="bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                          <Badge className="bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                             <CheckCircle2
                               className="mr-1 size-3"
                               aria-hidden="true"

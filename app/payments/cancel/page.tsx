@@ -31,7 +31,7 @@ async function PaymentCancelContent({
     <div className="mx-auto flex min-h-[75vh] w-full max-w-xl items-center justify-center px-4 py-12">
       <Card className="glass w-full rounded-2xl border-white/10">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-400">
+          <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400">
             <XCircle className="size-7" aria-hidden="true" />
           </div>
           <CardTitle className="text-xl">Checkout Cancelled</CardTitle>

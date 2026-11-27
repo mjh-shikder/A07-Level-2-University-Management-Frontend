@@ -253,7 +253,7 @@ export function StudentTranscriptClient({
               variant="outline"
               className={cn(
                 graduationEligible
-                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
                   : "border-white/15 text-muted-foreground"
               )}
             >

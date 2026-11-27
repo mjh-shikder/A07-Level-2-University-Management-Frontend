@@ -201,7 +201,7 @@ export function AdminSemestersClient({
               }
             >
               <CheckCircle2
-                className="size-3.5 text-emerald-400"
+                className="size-3.5 text-emerald-600 dark:text-emerald-400"
                 aria-hidden="true"
               />
               Complete

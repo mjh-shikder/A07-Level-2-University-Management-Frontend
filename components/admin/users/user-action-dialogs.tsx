@@ -164,7 +164,7 @@ export function UserRoleDialog({
                   </SelectContent>
                 </Select>
                 {selectedRole === "ADMIN" && user.role !== "ADMIN" ? (
-                  <p className="flex items-center gap-1.5 text-xs text-amber-300">
+                  <p className="flex items-center gap-1.5 text-xs text-amber-800 dark:text-amber-300">
                     <ShieldAlert className="size-3.5 shrink-0" aria-hidden="true" />
                     Granting ADMIN gives full control over users, grades, and billing.
                   </p>

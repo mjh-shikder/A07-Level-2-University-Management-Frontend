@@ -55,9 +55,12 @@ export function PaymentSuccessClient({
     <div className="mx-auto flex min-h-[75vh] w-full max-w-xl items-center justify-center px-4 py-12">
       <Card className="glass w-full rounded-2xl border-white/10">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-400">
+          <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
             {invoiceId && !isPaid ? (
-              <Clock className="size-7 text-amber-400" aria-hidden="true" />
+              <Clock
+                className="size-7 text-amber-600 dark:text-amber-400"
+                aria-hidden="true"
+              />
             ) : (
               <CheckCircle2 className="size-7" aria-hidden="true" />
             )}
@@ -126,7 +129,7 @@ export function PaymentSuccessClient({
               ) : null}
             </div>
           ) : invoiceQuery.isError ? (
-            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-200">
+            <div className="rounded-xl border border-amber-600/30 bg-amber-500/15 p-3 text-xs text-amber-950 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-200">
               {invoiceQuery.error.message ||
                 "Sign in to view full invoice receipt details."}
             </div>

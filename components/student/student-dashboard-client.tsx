@@ -160,15 +160,15 @@ export function StudentDashboardClient({
           className={cn(
             "flex flex-col gap-3 rounded-2xl border p-4 sm:flex-row sm:items-center sm:justify-between",
             hasOverdue
-              ? "border-destructive/40 bg-destructive/10 text-destructive-foreground"
-              : "border-amber-500/40 bg-amber-500/10 text-amber-100"
+              ? "border-destructive/40 bg-destructive/10 text-destructive dark:text-destructive-foreground"
+              : "border-amber-600/35 bg-amber-500/15 text-amber-950 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-100"
           )}
         >
           <div className="flex items-start gap-3">
             <AlertTriangle
               className={cn(
                 "mt-0.5 size-5 shrink-0",
-                hasOverdue ? "text-destructive" : "text-amber-400"
+                hasOverdue ? "text-destructive" : "text-amber-700 dark:text-amber-400"
               )}
               aria-hidden="true"
             />
@@ -237,7 +237,7 @@ export function StudentDashboardClient({
             {activeSemester ? (
               <Badge
                 variant="outline"
-                className="border-emerald-500/30 bg-emerald-500/10 text-xs text-emerald-300"
+                className="border-emerald-500/30 bg-emerald-500/10 text-xs text-emerald-700 dark:text-emerald-300"
               >
                 {activeSemester.name} · Active
               </Badge>

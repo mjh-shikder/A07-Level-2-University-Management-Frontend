@@ -214,7 +214,7 @@ export function SectionWizardDialog({
                   isActive
                     ? "border-primary/50 bg-primary/15 text-foreground"
                     : isCompleted
-                      ? "border-emerald-500/35 bg-emerald-500/10 text-emerald-300"
+                      ? "border-emerald-500/35 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
                       : "border-border/60 bg-secondary/20 text-muted-foreground"
                 )}
               >
