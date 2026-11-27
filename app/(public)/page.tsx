@@ -3,6 +3,8 @@ import Link from "next/link";
 import {
   ArrowRight,
   BookOpenCheck,
+  CalendarDays,
+  ClipboardCheck,
   CreditCard,
   GraduationCap,
   ShieldCheck,
@@ -12,6 +14,7 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { HeroCarousel } from "@/components/public/hero-carousel";
 import {
   Card,
   CardContent,
@@ -55,6 +58,41 @@ const PLATFORM_METRICS = [
   },
 ];
 
+const SEMESTER_WORKFLOW = [
+  {
+    step: "01",
+    role: "Admin",
+    title: "Catalog & Scheduling",
+    description:
+      "Define departments, degree programs, prerequisite chains, active semester windows, and conflict-free section timetables.",
+    icon: CalendarDays,
+  },
+  {
+    step: "02",
+    role: "Student",
+    title: "Smart Course Enrollment",
+    description:
+      "Register for open sections with real-time seat locks, prerequisite verification, schedule clash checks, and an 18-credit cap.",
+    icon: BookOpenCheck,
+  },
+  {
+    step: "03",
+    role: "Instructor",
+    title: "Attendance & Grading",
+    description:
+      "Record daily bulk attendance, configure 100%-weighted exams, enter student marks, and compute draft semester GPAs.",
+    icon: ClipboardCheck,
+  },
+  {
+    step: "04",
+    role: "Verified",
+    title: "Transcripts & Stripe Billing",
+    description:
+      "Publish official results into printable CGPA transcripts and settle semester tuition invoices via Stripe Checkout.",
+    icon: CreditCard,
+  },
+];
+
 const ROLE_HIGHLIGHTS = [
   {
     title: "For Students",
@@ -87,33 +125,96 @@ export default function HomePage() {
     <div className="mx-auto max-w-6xl space-y-16 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       {/* Hero Section */}
       <section className="glass-strong relative overflow-hidden rounded-2xl p-8 sm:p-12">
-        <div className="max-w-2xl space-y-6">
-          <Badge variant="outline" className="gap-1.5 border-primary/40 bg-primary/10 text-primary">
-            <Sparkles className="size-3.5" aria-hidden="true" />
-            Unified Academic Operations
-          </Badge>
+        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.82fr)] lg:gap-10">
+          <div className="max-w-2xl space-y-6">
+            <Badge
+              variant="outline"
+              className="gap-1.5 border-primary/40 bg-primary/10 text-primary"
+            >
+              <Sparkles className="size-3.5" aria-hidden="true" />
+              Unified Academic Operations
+            </Badge>
 
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl sm:leading-[1.08]">
-            One place for every semester.
-          </h1>
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl sm:leading-[1.08]">
+              One place for every semester.
+            </h1>
 
-          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Registration, attendance, exams, results, official transcripts, and
-            tuition billing — engineered for students, instructors, and
-            university administrators.
-          </p>
+            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Registration, attendance, exams, results, official transcripts, and
+              tuition billing — engineered for students, instructors, and
+              university administrators.
+            </p>
 
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <Button asChild size="lg">
-              <Link href="/login">
-                Open Portal
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/programs">Explore Programs</Link>
-            </Button>
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Button asChild size="lg">
+                <Link href="/login">
+                  Open Portal
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/programs">Explore Programs</Link>
+              </Button>
+            </div>
           </div>
+          <HeroCarousel />
+        </div>
+      </section>
+      {/* End-to-End Semester Lifecycle */}
+      <section className="glass-strong relative overflow-hidden rounded-2xl p-8 sm:p-10">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl space-y-2">
+            <Badge
+              variant="outline"
+              className="gap-1.5 border-primary/40 bg-primary/10 text-primary"
+            >
+              <Sparkles className="size-3.5" aria-hidden="true" />
+              Connected Campus Lifecycle
+            </Badge>
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              From course setup to official transcripts.
+            </h2>
+            <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Every academic rule—prerequisites, seat capacities, attendance,
+              weighted grading, and tuition clearance—stays synchronized across
+              all three portals.
+            </p>
+          </div>
+          <Button asChild variant="outline" size="sm" className="shrink-0">
+            <Link href="/about">
+              Learn How It Works
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </Button>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {SEMESTER_WORKFLOW.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.step}
+                className="flex flex-col justify-between rounded-xl border border-border/70 bg-background/40 p-5"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex size-9 items-center justify-center rounded-lg border border-primary/30 bg-primary/15 text-primary">
+                      <Icon className="size-4" aria-hidden="true" />
+                    </div>
+                    <span className="font-mono text-xs font-semibold text-muted-foreground">
+                      {item.step} · {item.role}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-semibold text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 

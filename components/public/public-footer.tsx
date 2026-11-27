@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export function PublicFooter() {
@@ -9,9 +10,12 @@ export function PublicFooter() {
             href="/"
             className="inline-flex items-center gap-2 text-base font-semibold tracking-tight text-foreground"
           >
-            <span
-              className="size-2 rounded-full bg-primary"
-              aria-hidden="true"
+            <Image
+              src="/uniManage.png"
+              alt="UniManage logo"
+              width={24}
+              height={24}
+              className="size-6 object-contain"
             />
             UniManage
           </Link>

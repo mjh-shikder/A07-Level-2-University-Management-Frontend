@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -7,11 +8,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <div className="flex flex-col justify-between gap-6 lg:max-w-lg lg:py-12">
         <Link
           href="/"
-          className="inline-flex w-fit items-center gap-2.5 text-lg font-semibold tracking-tight text-foreground transition-opacity hover:opacity-85"
+          className="inline-flex w-fit items-center gap-2.5 text-2xl font-semibold tracking-tight text-foreground transition-opacity hover:opacity-85"
         >
-          <span
-            className="size-2.5 rounded-full bg-primary glow-brand"
-            aria-hidden="true"
+          <Image
+            src="/uniManage.png"
+            alt="UniManage logo"
+            width={80}
+            height={80}
+            className="size-9 object-contain"
           />
           UniManage
         </Link>

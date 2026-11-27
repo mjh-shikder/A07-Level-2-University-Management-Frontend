@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -106,20 +107,27 @@ function NavLink({
     <Link
       href={item.href}
       onClick={onClick}
+      aria-current={isActive ? "page" : undefined}
       className={cn(
-        "group flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200",
+        "group relative flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200",
         isActive
-          ? "bg-accent-brand/15 text-accent-brand shadow-[inset_0_0_0_1px_hsl(var(--accent-brand)/0.3)]"
-          : "text-muted-foreground hover:bg-white/5 hover:text-foreground",
+          ? "bg-primary/15 text-primary ring-1 ring-inset ring-primary/35"
+          : "text-muted-foreground hover:bg-accent hover:text-foreground",
         collapsed && "justify-center px-2"
       )}
       title={collapsed ? item.label : undefined}
     >
+      {isActive && !collapsed ? (
+        <span
+          aria-hidden="true"
+          className="absolute left-0 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-primary"
+        />
+      ) : null}
       <Icon
         className={cn(
           "size-4 shrink-0 transition-colors",
           isActive
-            ? "text-accent-brand"
+            ? "text-primary"
             : "text-muted-foreground group-hover:text-foreground"
         )}
       />
@@ -157,9 +165,13 @@ function DesktopSidebar({
           collapsed && "justify-center px-2"
         )}
       >
-        <div className="size-7 rounded-lg bg-accent-brand/20 flex items-center justify-center shrink-0">
-          <GraduationCap className="size-4 text-accent-brand" />
-        </div>
+        <Image
+          src="/uniManage.png"
+          alt="UniManage logo"
+          width={28}
+          height={28}
+          className="size-7 shrink-0  object-contain"
+        />
         {!collapsed && (
           <span className="text-sm font-semibold text-foreground truncate">
             {roleLabel}
@@ -252,9 +264,13 @@ function MobileDrawer({
         {/* Header */}
         <div className="flex items-center px-4 min-h-14 border-b border-white/5 pr-12">
           <div className="flex items-center gap-2.5">
-            <div className="size-7 rounded-lg bg-accent-brand/20 flex items-center justify-center">
-              <GraduationCap className="size-4 text-accent-brand" />
-            </div>
+            <Image
+              src="/uniManage.png"
+              alt="UniManage logo"
+              width={28}
+              height={28}
+              className="size-7 shrink-0  object-contain"
+            />
             <span className="text-sm font-semibold text-foreground">
               {roleLabel}
             </span>

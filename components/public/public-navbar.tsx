@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Menu } from "lucide-react";
@@ -50,9 +51,12 @@ export function PublicNavbar({
           href="/"
           className="inline-flex items-center gap-2.5 text-base font-semibold tracking-tight text-foreground"
         >
-          <span
-            className="size-2.5 rounded-full bg-primary glow-brand"
-            aria-hidden="true"
+          <Image
+            src="/uniManage.png"
+            alt="UniManage logo"
+            width={28}
+            height={28}
+            className="size-7 object-contain"
           />
           UniManage
         </Link>
@@ -122,9 +126,12 @@ export function PublicNavbar({
             <SheetContent side="right" className="w-72">
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
-                  <span
-                    className="size-2 rounded-full bg-primary"
-                    aria-hidden="true"
+                  <Image
+                    src="/uniManage.png"
+                    alt="UniManage logo"
+                    width={24}
+                    height={24}
+                    className="size-6 rounded-md object-contain"
                   />
                   UniManage
                 </SheetTitle>

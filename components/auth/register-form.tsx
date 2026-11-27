@@ -53,6 +53,7 @@ function getPasswordStrength(password: string): {
 export function RegisterForm() {
   const { registerMutation } = useAuth({ enabled: false });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [retryCountdown, setRetryCountdown] = useState(0);
 
   const {
@@ -300,15 +301,35 @@ export function RegisterForm() {
 
         <div className="space-y-2">
           <Label htmlFor="register-confirm-password">Confirm password</Label>
-          <Input
-            id="register-confirm-password"
-            type={showPassword ? "text" : "password"}
-            autoComplete="new-password"
-            placeholder="Re-enter password"
-            aria-invalid={Boolean(errors.confirmPassword)}
-            disabled={isDisabled}
-            {...register("confirmPassword")}
-          />
+          <div className="relative">
+            <Input
+              id="register-confirm-password"
+              type={showConfirmPassword ? "text" : "password"}
+              autoComplete="new-password"
+              placeholder="Re-enter password"
+              className="pr-10"
+              aria-invalid={Boolean(errors.confirmPassword)}
+              disabled={isDisabled}
+              {...register("confirmPassword")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+              aria-label={
+                showConfirmPassword
+                  ? "Hide confirm password"
+                  : "Show confirm password"
+              }
+              disabled={isDisabled}
+            >
+              {showConfirmPassword ? (
+                <EyeOff className="size-4" aria-hidden="true" />
+              ) : (
+                <Eye className="size-4" aria-hidden="true" />
+              )}
+            </button>
+          </div>
           {errors.confirmPassword ? (
             <p className="text-xs text-destructive" role="alert">
               {errors.confirmPassword.message}
