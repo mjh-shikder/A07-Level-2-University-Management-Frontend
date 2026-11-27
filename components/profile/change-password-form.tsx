@@ -165,8 +165,8 @@ export function ChangePasswordForm() {
       </CardHeader>
 
       <CardContent className="space-y-5">
-        <div className="flex items-start gap-2.5 rounded-xl border border-amber-500/25 bg-amber-500/10 p-3 text-xs text-amber-200">
-          <ShieldAlert className="mt-0.5 size-4 shrink-0 text-amber-400" aria-hidden="true" />
+        <div className="flex items-start gap-2.5 rounded-xl border border-amber-600/30 bg-amber-500/15 p-3 text-xs text-amber-950 dark:border-amber-500/25 dark:bg-amber-500/10 dark:text-amber-200">
+          <ShieldAlert className="mt-0.5 size-4 shrink-0 text-amber-700 dark:text-amber-400" aria-hidden="true" />
           <p>
             Changing your password revokes all active sessions. You will be signed out
             and prompted to log in again.
